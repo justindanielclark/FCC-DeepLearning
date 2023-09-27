@@ -12,3 +12,8 @@
 #^ Matrix Multiplication Visualizor
 # http://matrixmultiplication.xyz/
 
+#^ TensorFlow Playground
+# https://playground.tensorflow.org/
+
+#^ Torch Metrics
+# https://torchmetrics.readthedocs.io/en/latest/

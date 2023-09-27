@@ -18,6 +18,7 @@ from torch import nn ##contains all of PyTorch's building blocks for NeuralNetwo
 #? torch.nn = https://pytorch.org/docs/stable/nn.html
 from utils.printTensor import printTensor as pt
 from utils.plotPredictions import plot_predictions as pp
+from pathlib import Path
 
 #^ Data (Preparing and Loading)
 #? Data can be almost anything in machine learning
@@ -154,7 +155,7 @@ optimizer = torch.optim.SGD(
 #? An Epoch is one loop through the data...
   #? Epoch is a hyperparameter because we have set it ourself
 
-pp(X_train, y_train, X_test, y_test, y_pred)
+# pp(X_train, y_train, X_test, y_test, y_pred)
 
 epochs = 1000
 print(list(model_0.parameters()))
@@ -184,7 +185,7 @@ for epoch in range(epochs):
   print(f"Epoch: {epoch} | Train loss: {loss:.4f} | Test loss: {test_loss:.4f}")
 
 print(list(model_0.parameters()))
-pp(X_train, y_train, X_test, y_test, test_pred)
+# pp(X_train, y_train, X_test, y_test, test_pred)
 
 #^ Training Loop 2 With A Finer Tuned Learning Rate...
 
@@ -205,7 +206,7 @@ for epoch in range(epochs):
   print(f"Epoch: {epoch} | Train loss: {loss:.4f} | Test loss: {test_loss:.4f}")
 
 print(list(model_0.parameters()))
-pp(X_train, y_train, X_test, y_test, test_pred)
+# pp(X_train, y_train, X_test, y_test, test_pred)
 
 
 #^ Training Loop 3 With An Even Finer Tuned Learning Rate...
@@ -226,7 +227,7 @@ for epoch in range(epochs):
   print(f"Epoch: {epoch} | Train loss: {loss:.4f} | Test loss: {test_loss:.4f}")
 
 print(list(model_0.parameters()))
-pp(X_train, y_train, X_test, y_test, test_pred)
+# pp(X_train, y_train, X_test, y_test, test_pred)
 
 
 #^ Training Loop 4 With An Even Finer Tuned Learning Rate...
@@ -247,4 +248,19 @@ for epoch in range(epochs):
   print(f"Epoch: {epoch} | Train loss: {loss:.4f} | Test loss: {test_loss:.4f}")
 
 print(list(model_0.parameters()))
-pp(X_train, y_train, X_test, y_test, test_pred)
+# pp(X_train, y_train, X_test, y_test, test_pred)
+
+#^ Saving & Loading A Model
+#? Can Save/Load a State_Dict -or- The Entire Model
+MODELS_PATH = Path("models")
+MODELS_PATH.mkdir(parents=True, exist_ok=True)
+FULL_MODELS_PATH = Path("models/full")
+FULL_MODELS_PATH.mkdir(parents=True, exist_ok=True)
+STATE_DICT_MODELS_PATH = Path("models/state_dict")
+STATE_DICT_MODELS_PATH.mkdir(parents=True, exist_ok=True)
+MODEL_NAME = '04_pytorch_workflow_model.pt'
+STATE_DICT_NAME = '04_pytorch_workflow_state_dict.pt'
+FULL_MODEL_SAVE_PATH = FULL_MODELS_PATH / MODEL_NAME
+STATE_DICT_SAVE_PATH = STATE_DICT_MODELS_PATH / STATE_DICT_NAME
+torch.save(obj=model_0, f=FULL_MODEL_SAVE_PATH)
+torch.save(obj=model_0.state_dict(), f=STATE_DICT_SAVE_PATH)

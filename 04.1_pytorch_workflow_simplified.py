@@ -4,6 +4,8 @@ import torch
 from torch import nn
 from utils.plotPredictions import plot_predictions as pp
 
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
 #^ Data (Preparing and Loading)
 X = torch.arange(-10, 10, .02).unsqueeze(dim = 1)
 weight = random.random() * 2 - 1
